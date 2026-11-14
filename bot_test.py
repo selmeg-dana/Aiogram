@@ -19,6 +19,11 @@ async def cmd_start(message: types.Message):
 @dp.message(Command("help"))
 async def help(message: types.Message):
     await message.answer("Это  бот помощник. Я пока ничего не умею, но скоро научусь!")
+    
+# dp.message(Command("start"))  // Во-первых, нет @
+# async def cmd_start(message: Message):  // Во-вторых, просто Message нельзя передавать
+#     message.answer("Привет!")  // В-третьих, нет await
+
 
 @dp.message(F.text)
 async def all_message(message: types.Message):
