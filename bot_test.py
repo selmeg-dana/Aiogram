@@ -7,14 +7,18 @@ from aiogram.filters.command import Command
 logging.basicConfig(level=logging.INFO)
 
 # 2. СОЗДАЕМ ТЕЛО И МОЗГ
-bot = Bot(token="8961675119:AAGBhew00kZY8OYV5R2z0qcR31Oh-KWJMMQ") # Твое тело (выполняет приказы)
-dp = Dispatcher()                    # Твой мозг (принимает решения)
+bot = Bot(token="") # Твое тело (выполняет приказы)
+dp = Dispatcher() # Твой мозг (принимает решения)
 
 # 3. СТАВИМ ЛОВУШКУ (Хэндлер)
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Привет! Я твой первый бот! 🚀")
-    await message.answer(f"Привет! {message.from_user.first_name}! Я проснулся!🚀")
+    await message.answer("Запуск систем...")
+    await message.answer(f"Привет! {message.from_user.first_name}! Бот готов к работе!")
+
+@dp.message(Command("help"))
+async def help(message: types.Message):
+    await message.answer("Это  бот помощник. Я пока ничего не умею, но скоро научусь!")
 
 @dp.message(F.text)
 async def all_message(message: types.Message):
