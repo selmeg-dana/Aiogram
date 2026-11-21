@@ -23,17 +23,29 @@ async def cmd_start(message: types.Message):
     await message.answer(f"Привет! {message.from_user.first_name}! Бот готов к работе!")
 
 @dp.message(Command("my_card"))
-async def all_photo(message: types.Message):
+async def photo_user(message: types.Message):
     photo_file = FSInputFile("C:\Aiogram\Photo\winter.jpg")
 
     await message.answer_photo(
             photo = photo_file,
-            caption = f"Зима крутая аватарка! \nВот твои имя и ID: {message.from_user.first_name}, {message.from_user.id}"
+            caption = f"Зима - крутая аватарка! \nВот твое имя и ID: {message.from_user.first_name}, {message.from_user.id}"
                               )
+    
+@dp.message(Command("album"))
+async def all_photo(message: types.Message):
+    photo_1 = FSInputFile("C:\Aiogram\Photo\\field.jpg")
+    photo_2 = FSInputFile("C:\Aiogram\Photo\\forest.jpg")
+    photo_3 = FSInputFile("C:\Aiogram\Photo\lake.jpg")
+    album = [photo_1, photo_2, photo_3]
+
+    for i in range(len(album)):
+        await message.answer_photo(
+                photo = album[i-1]
+                                )
 
 @dp.message(Command("help"))
 async def help(message: types.Message):
-    await message.answer("Это  бот помощник. Я пока ничего не умею, но скоро научусь!")
+    await message.answer("Это бот помощник. Я пока ничего не умею, но скоро научусь!")
     
 @dp.message(Command("cat"))
 async def all_photo(message: types.Message):
