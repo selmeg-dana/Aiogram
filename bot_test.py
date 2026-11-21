@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters.command import Command
+from aiogram.types import FSInputFile
 
 load_dotenv()
 
@@ -25,13 +26,23 @@ async def cmd_start(message: types.Message):
 async def help(message: types.Message):
     await message.answer("Это  бот помощник. Я пока ничего не умею, но скоро научусь!")
     
+@dp.message(Command("cat"))
+async def all_photo(message: types.Message):
+    photo_file = FSInputFile("C:\Aiogram\Photo\cat.jpg")
+
+    await message.answer_photo(
+            photo = photo_file,
+            caption = "Милый котик"
+                              )
+    
 # dp.message(Command("start"))  // Во-первых, нет @
 # async def cmd_start(message: Message):  // Во-вторых, просто Message нельзя передавать
 #     message.answer("Привет!")  // В-третьих, нет await
 
 
+
 @dp.message(F.sticker)
-async def all_message(message: types.Message):
+async def all_stickers(message: types.Message):
     await message.answer_sticker(f'{message.sticker.file_id}')
 
 @dp.message(F.text)
